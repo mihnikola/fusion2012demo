@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { groupActions } from '../store/add-group-slice';
+import { groupActions } from '../store/group-slice';
 import styles from "../UI/CheckUserIds.module.scss";
 
 function CheckUserIds() {
-  const users = useSelector((state) => state.group.userChecked);
+  const users = useSelector((state) => state.group.users);
   const dispatch = useDispatch();
   const removeUser = (user) => {
-    console.log("CheckUserIds removeUser",user)
+    console.log("CheckUserIds removeUser", user)
     dispatch(groupActions.removeUserFromGroup(user));
   }
   return (

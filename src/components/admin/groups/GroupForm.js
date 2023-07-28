@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import styles from "../groups/GroupForm.module.css";
-import GIRLogo from "../../../img/logo.png";
+import FusionLogo from "../../../img/green-power.png";
 import Header from '../boxes/Header';
 import Search from '../../UI/Search';
 import FormListButton from '../form/FormListButton';
@@ -11,9 +11,10 @@ import ButtonClose from '../../UI/ButtonClose';
 
 export default function GroupForm(props) {
 
-    const {users, socket} = props;
+    const {socket, groups} = props;
     const [show2, setShow2] = useState(false);
     const [query, setQuery] = useState("");
+  
     const editHandler = (data,group,check) => {
         console.log("AJMOOOOOOO");
         console.log(group);
@@ -31,15 +32,15 @@ export default function GroupForm(props) {
         <form>
             <Header
                 style={styles.titleGroupForm}
-                title="Grupe"
-                image={GIRLogo}
+                title="Groups"
+                image={FusionLogo}
                 imageStyle={styles.log}
             />
             <Search
                 type="search"
                 // className={styles.pretraga}
                 style={styles.searchUsers}
-                placeholder="Unesite pretragu..."
+                placeholder="Search..."
                 autoComplete="off"
                 id="search"
                 // onChange={(e) => setQuery(e.target.value)}
@@ -48,8 +49,8 @@ export default function GroupForm(props) {
             <ButtonClose query={query} onAddCheck={checkHandler}/>
             <FormListButton 
                 query={query} 
-                users={users} 
                 socket={socket} 
+                groups={groups}
                 onEditGroup={editHandler} 
                 refresh={refreshHandler}
             />

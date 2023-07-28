@@ -1,12 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { groupActions } from '../../store/add-group-slice';
-import { updateUsersData } from '../../store/edit-user-actions';
-import { userActions } from '../../store/edit-user-slice';
+
+import { userActions } from '../../store/user-slice';
 import Input from '../../UI/Input';
 import Header from '../boxes/Header';
 import FusionLogo from './../../../img/green-power.png'
 import styles from './EditUser.module.css'
+import { usersActions } from '../../store/users-slice';
 function EditUser() {
 
   const id = useSelector(state => state.user.id);
@@ -16,6 +16,7 @@ function EditUser() {
   const email = useSelector(state => state.user.email);
   const error = useSelector(state => state.user.error);
   const dispatch = useDispatch();
+  const dispatchUsers = useDispatch();
 
 
   const handleChangeName = (e) => {
@@ -39,9 +40,8 @@ function EditUser() {
     const formData = {
       id, name, lastName, email, active
     }
-    console.log("changeUserHandler", formData)
-    
-    // dispatch(updateUsersData(formData));
+    dispatchUsers(usersActions.editUser(formData));
+    dispatch(userActions.editReset({}));
   };
 
   return (

@@ -1,49 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '../../UI/Button';
-import ButtonClose from '../../UI/ButtonClose';
 import CheckUserIds from '../../UI/CheckUserIds';
 import Input from '../../UI/Input';
 import UsersList from '../../users/UsersList';
 import Header from '../boxes/Header';
 import styles from './AddUserGroup.module.css';
 import FusionLogo from './../../../img/green-power.png'
-import { addGroupData, fetchGroupData } from '../../store/add-group-actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { groupActions } from '../../store/add-group-slice';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { groupActions } from '../../store/group-slice';
+import { groupsActions } from '../../store/groups-slice';
+
 const AddUserGroup = () => {
 
     const [query, setQuery] = useState("");
     const [show2, setShow2] = useState("");
-    const navigate = useNavigate();
-    const usersData = useSelector((state) => state.group.userChecked);
-    const group = useSelector((state) => state.group.nameGroup);
-    const dispatch = useDispatch();
+
+    const group = useSelector((state) => state.group.name);
+    const users = useSelector((state) => state.users.users);
+    const usersChecked = useSelector((state) => state.group.users);
+    const dispatchGroups = useDispatch();
+    const dispatchGroup = useDispatch();
 
     const addGroupNameHandler = (e) => {
-        console.log(e.target.value);
-        dispatch(groupActions.editGroupName(e.target.value));
+        dispatchGroup(groupActions.editGroupName(e.target.value));
     }
     const submitHandler = (e) => {
         e.preventDefault();
-        const groupData = {
-            users: usersData, name: group 
-        };
-        console.log("groupData", groupData);
-        let result = dispatch(addGroupData(groupData));
-        result.then(()=>{
-            console.log("test");
-            navigate('/xxx');
-        })
+        if (usersChecked.length > 0 && group !== "") {
+            const groupData = {
+                users: usersChecked,
+                id: Math.round(Math.random() * 10000),
+                name: group
+            };
+            dispatchGroups(groupsActions.setGroups(groupData));
+            dispatchGroup(groupActions.getUsers([]));
+            dispatchGroup(groupActions.setResetGroupName());
+        }
 
-       
-    }
-    const checkHandler = (e) => {
-        setQuery("");
     }
     return (
         <form onSubmit={submitHandler}>
-        
             <Header
                 style={styles.titleofForm}
                 title="Users"
@@ -56,6 +52,7 @@ const AddUserGroup = () => {
                 placeholder="Add group name..."
                 autoComplete="off"
                 onChange={addGroupNameHandler}
+                value={group}
             />
             <CheckUserIds />
             <Input
@@ -65,9 +62,8 @@ const AddUserGroup = () => {
                 autoComplete="off"
                 onChange={(e) => (setQuery(e.target.value) || e.target.value.length >= 3 ? setShow2(true) : setShow2(false))}
             />
-
             <div className={styles.boxforUsers}>
-                <UsersList criteria={query}  />
+                <UsersList users={users} criteria={query} />
             </div>
             <Button
                 style={styles['btn-addpost']}

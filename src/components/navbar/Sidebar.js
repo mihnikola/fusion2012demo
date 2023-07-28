@@ -19,11 +19,11 @@ const Sidebar = (props) => {
 
     const navigateHome = () => {
         // 👇️ navigate to /contacts
-        navigate('/kreiranje_grupe');
+        navigate('/groups/create');
         
       };
     const navigateViewGroup=()=>{
-      navigate('/pregled_grupe');
+      navigate('/groups');
     }
    
     const navigateMessage = () => {

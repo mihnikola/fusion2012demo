@@ -49,11 +49,11 @@ function App() {
                   {/* <Route path="/xx" element={<Login socket={socket} />} /> */}
                   <Route path="/" element={ <Login />} />
                   <Route path="/register" element={<Register />} />
-                  <Route path="/kreiranje_grupe" element={<AdminForm socket={socket} />} />
+                  <Route path="/groups/create" element={<CreateGroup />} />
                   <Route path="/k" element={<AdminForm socket={socket} />} />
-                  <Route path="/ccc" element={<CreateGroup />} />
+                  {/* <Route path="/ccc" element={<CreateGroup />} /> */}
                   {/* <Route path="/xxx" element={<CreateSurvey socket={socket} />} /> */}
-                  <Route path="/pregled_grupe" element={<Group socket={socket} />} />
+                  <Route path="/groups" element={<Group />} />
                   <Route path="/poruke" element={<Post socket={socket} />} />
                   <Route path="/kreiranje_poruke" element={<AddPost socket={socket} />} />
                   <Route path="/meni_bar" element={<Sidebar socket={socket} />} />

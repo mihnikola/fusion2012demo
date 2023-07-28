@@ -4,12 +4,13 @@ import Input from '../UI/Input';
 import styles from './UserItem.module.css'
 import editImg from './../../img/edit.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../store/edit-user-slice';
-import { groupActions } from '../store/add-group-slice';
+import { userActions } from '../store/user-slice';
+import { groupActions } from '../store/group-slice';
 function UserItem(props) {
   const { user } = props;
-  const users = useSelector((state)=>state.group.userChecked);
+  const users = useSelector((state)=>state.group.users);
   const dispatch = useDispatch();
+
 
   const editUserHandler = (e) =>{
     e.preventDefault();
