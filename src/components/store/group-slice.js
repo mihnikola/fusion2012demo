@@ -12,6 +12,7 @@ const groupSlice = createSlice({
         editGroupName(state, action) {
             state.name = action.payload;
         },
+       
         setResetGroupName(state, action){
             state.name = "";
         },

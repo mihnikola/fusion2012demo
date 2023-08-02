@@ -6,6 +6,7 @@ import ModalOverlay from '../../UI/ModalOverlay';
 import BackdropGroup from '../groups/BackdropGroup';
 import { useDispatch } from 'react-redux';
 import { groupActions } from '../../store/group-slice';
+import { groupsActions } from '../../store/groups-slice';
 export default function FormListButton(props) {
   const { groups, query, socket } = props;
 
@@ -14,8 +15,9 @@ export default function FormListButton(props) {
   const [check, setCheck] = useState(false);
   const [arrayUsers, setArrayUsers] = useState([{ data_id: "", name: "", status: "" }]);
   const [modalForm, setModalForm] = useState(false);
-  console.log("FormListButton", groups)
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     // console.log(group);
     if (check) {
@@ -25,55 +27,23 @@ export default function FormListButton(props) {
 
   const removeGroupHandler = (e) => {
     e.preventDefault();
-    let id = e.target.id;
-
-    if (id != null) {
-      setModalForm(true);
-      setGroupId(id);
-      // <ModalOverlay check="true" title="Da li ste sigurni da li želite da sačuvate anketu?" />
-    }
-
+    dispatch(groupsActions.setRemoveGroup(e.target.id));
   };
 
   const editGroupHandler = (e) => {
     e.preventDefault();
-    const group = groups.find((group) => group.id == e.target.id);
-    dispatch(groupActions.setGroupEdit(group));
+    console.log(" editGroupHandler id",e.target.id)
+    dispatch(groupsActions.setEditMode({edit: true, id:e.target.id}));
+
   };
   const modalFormHandler = () => {
     setModalForm(false);
   }
   const approvedFormHandler = (approve) => {
-    // setModalForm(false);
-    // if(approve){
-    // socket?.emit("remove_group_user", { id: groupId }, function (dataFromServer) {
-    //       console.log(dataFromServer);
-    //       if (dataFromServer === "ok") {
-    //         props.refresh();
-    //       }
-    //     });
-    // }
+
     
   }
-  // const groups = [
-  //   {
-  //     id: 1,
-  //     name: "studenti",
-  //     users: [
-  //       { id: 12, name: 'zdravko colic' },
-  //       { id: 13, name: 'marko colic' },
-  //       { id: 14, name: 'janko colic' },
-  //     ]
-  //   }, {
-  //     id: 2,
-  //     name: "radnici",
-  //     users: [
-  //       { id: 15, name: 'milica mikic' },
-  //       { id: 16, name: 'lazar bikic' },
-  //       { id: 17, name: 'filip cicic' },
-  //     ]
-  //   }
-  // ]
+
 
   return (
     <>

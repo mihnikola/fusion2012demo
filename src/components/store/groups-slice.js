@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
-    groups:[]
+    groups: [],
+    group: [],
+    editMode: false,
 };
 const groupsSlice = createSlice({
     name: 'groups',
@@ -9,7 +11,38 @@ const groupsSlice = createSlice({
         setGroups(state, action) {
             state.groups = [...state.groups, action.payload];
         },
-       
+        setRemoveGroup(state, action) {
+            state.groups = state.groups.filter((group) => group.id != action.payload)
+        },
+        setEditMode(state, action) {
+            state.editMode = action.payload.edit;
+            if (action.payload.id) {
+                state.group = state.groups.find((group) => group.id == action.payload.id);
+
+            }
+        },
+         updateGroupName(state, action){
+            let {group, groupName} = action.payload;
+            const changeGroupName = {
+                id: group.id, name: groupName, users: group.users
+            }
+            state.group = changeGroupName;
+
+        },
+        removeUser(state, action) {
+            let { id, group } = action.payload;
+            const filteredGroupUsers = {
+                id: group.id, name: group.name, users: group.users.filter(user => user.id != id)
+            };
+            state.group = filteredGroupUsers;
+        },
+        setUpdateGroup(state, action){
+            let {group} = action.payload;
+            let obj_ind = state.groups.findIndex((g) => g.id == group.id);
+            let groups = [...state.groups];
+            groups[obj_ind].users = group.users;
+            groups[obj_ind].name = group.name;
+        }
     }
 })
 

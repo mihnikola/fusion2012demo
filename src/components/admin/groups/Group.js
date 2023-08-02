@@ -7,17 +7,15 @@ import GroupForm from "./GroupForm";
 import { useSelector } from "react-redux";
 
 const Group = () => {
-  const [editUsers, setEditUsers] = useState("");
-  const [check, setCheck] = useState(false);
+ 
   const groups = useSelector((state) => state.groups.groups);
-
-
+  const editMode = useSelector((state)=> state.groups.editMode);
 
   return (
     <Sidebar>
       <LayoutBox>
-        {!check && <GroupForm  groups={groups}  />}
-        {check  && <EditGroupForm  usersEdit={editUsers} />}
+        {!editMode && <GroupForm groups={groups}  />}
+        {editMode  && <EditGroupForm />}
       </LayoutBox>
     </Sidebar>
   );
