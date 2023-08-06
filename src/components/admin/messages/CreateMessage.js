@@ -8,27 +8,30 @@ import styles from '../messages/CreateMessage.module.css';
 import { useNavigate } from 'react-router-dom';
 import ButtonClose from '../../UI/ButtonClose'
 import CheckedListUsers from '../checkedUsers/CheckedListUsers'
+import { useSelector } from 'react-redux'
 
 export default function CreateMessage({ socket }) {
     const [checkedUsersIds, setCheckedUsersIds] = useState([]);
 
     const [msg, setMsg] = useState("");
-    const [users, setUsers] = useState([]);
     const [serverData, setServerData] = useState([]);
+    const [users, setUsers] = useState([]);
     const [query, setQuery] = useState("");
     const [mailman, setMailman] = useState("");
     const [unChecked, setUnChecked] = useState("");
     let navigate = useNavigate();
     const [show2, setShow2] = useState(false);
+    const groups = useSelector((state) => state.groups.groups);
+    const members  = useSelector((state) => state.users.users);
+
 
     const readMsgHandler = message => {
-        
         setMsg(message);
     }
     useEffect(() => {
-        console.log("MESSAGE");
-        console.log(msg);
-    }, [msg])
+        let merged = [...members, ...groups];
+        setUsers(merged);
+    }, []);
     
     const readCheckedItemsHandler = data => {
         setServerData(data);
@@ -53,14 +56,6 @@ export default function CreateMessage({ socket }) {
         setShow2(false);
     }
 
-   
-    useEffect(() => {
-        socket?.emit("all_all_users", { admin: window.name }, function (dataFromServer) {
-            setMailman(window.name);
-            setUsers(dataFromServer);
-        })
-    }, []);
-
     const submitHandler = (event) => {
         event.preventDefault();
         const addForm = {
@@ -68,27 +63,14 @@ export default function CreateMessage({ socket }) {
             msg, 
             from_user: mailman
         }
-        
 
-        
-        if (msg.length > 0) {
-            console.log("addForm");
-        console.log(addForm);
-            socket?.emit("cr_msg", addForm, function (data) {
-                if(data != "no results" || data != "nok"){
-                    console.log(data); 
-                    navigate('/poruke');
-                }
-                
-            });
-        }
     }
 
     return (
         <form onSubmit={submitHandler}>
             <Header
                 style={styles.titleAddPost}
-                title="Pošalji poruku" 
+                title="Create post" 
             />
             <CheckedListUsers users={users} 
              onRemoveCheckedItems={unCheckedItemsHandler} 
@@ -101,7 +83,7 @@ export default function CreateMessage({ socket }) {
                 style={styles.searchUsers}
                 id="grupa"
                 name="grupa"
-                placeholder="Unesite pretragu..."
+                placeholder="Search..."
                 autoComplete="off"
                 onChange={(e) => setQuery(e.target.value)}
             />
@@ -121,13 +103,13 @@ export default function CreateMessage({ socket }) {
             <Textarea
                 style={styles['input-box-txt']}
                 // style={styles.searchUsers}
-                placeholder="Unesite poruku..."
+                placeholder="Add message..."
                 addMessage={readMsgHandler}
             />
             <Button
                 style={styles['btn-addpost']}
                 type="submit"
-                title="Pošalji"
+                title="Save"
             />
         </form>
     )

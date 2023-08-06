@@ -27,7 +27,7 @@ const Sidebar = (props) => {
     }
    
     const navigateMessage = () => {
-        navigate('/kreiranje_poruke');
+        navigate('/create/messages');
       };
       const navigateViewQuestions = () => {
         navigate('/surveys');
@@ -57,10 +57,10 @@ const Sidebar = (props) => {
                     <p className="title-of-sidebar">FUSION 2012 KV</p>
                 </header>
                 <ul className="list-sidebar">
-                    <li className="litag-sidebar" onClick={navigateHome}><a className="atag-sidebar"><i className="itag-sidebar"><FaUsers /></i>Napravi grupu</a></li>
-                    <li className="litag-sidebar" onClick={navigateViewGroup}><a className="atag-sidebar"><i className="itag-sidebar"><FaUsers /></i>Pregled grupe</a></li>
-                    <li className="litag-sidebar" onClick={navigateMessage}><a className="atag-sidebar"><i className="itag-sidebar"><FaRegCommentDots /></i>Poruka</a></li>
-                    <li className="litag-sidebar" onClick={navigateViewMessage}><a className="atag-sidebar"><i className="itag-sidebar"><FaRegComments /></i>Pregled</a></li>
+                    <li className="litag-sidebar" onClick={navigateHome}><a className="atag-sidebar"><i className="itag-sidebar"><FaUsers /></i>Create group</a></li>
+                    <li className="litag-sidebar" onClick={navigateViewGroup}><a className="atag-sidebar"><i className="itag-sidebar"><FaUsers /></i>Groups</a></li>
+                    <li className="litag-sidebar" onClick={navigateMessage}><a className="atag-sidebar"><i className="itag-sidebar"><FaRegCommentDots /></i>Create post</a></li>
+                    <li className="litag-sidebar" onClick={navigateViewMessage}><a className="atag-sidebar"><i className="itag-sidebar"><FaRegComments /></i>Posts</a></li>
                     <li className="litag-sidebar" onClick={navigateViewQuestions}><a className="atag-sidebar"><i className="itag-sidebar"><RiTodoLine /></i>Create survey</a></li>
                     <li className="litag-sidebar" onClick={navigateViewAddQuestions}><a className="atag-sidebar"><i className="itag-sidebar"><VscDiffAdded /></i>Assign survey </a></li>
                     <li className="litag-sidebar" onClick={navigateLogout}><a className="atag-sidebar"><i className="itag-sidebar"><CiLogout /></i>Odjavi se</a></li>

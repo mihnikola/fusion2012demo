@@ -9,14 +9,16 @@ const usersSlice = createSlice({
                 name: "nenad",
                 lastName: "radovic",
                 email: "nenad.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }, {
                 id: 3,
                 name: "uros",
                 lastName: "radovic",
                 email: "uros.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             },
             {
@@ -24,49 +26,56 @@ const usersSlice = createSlice({
                 name: "rados",
                 lastName: "radovic",
                 email: "rados.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }, {
                 id: 550,
                 name: "mihajlo",
                 lastName: "radovic",
                 email: "mihajlo.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }, {
                 id: 88,
                 name: "sinisa",
                 lastName: "radovic",
                 email: "sinisa.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }, {
                 id: 123,
                 name: "jovan",
                 lastName: "radovic",
                 email: "jovan.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }, {
                 id: 2222,
                 name: "mile",
                 lastName: "radovic",
                 email: "mile.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }, {
                 id: 2323222,
                 name: "misko",
                 lastName: "radovic",
                 email: "misko.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }, {
                 id: 29292,
                 name: "zarko",
                 lastName: "radovic",
                 email: "zarko.radovic@example.rs",
-                active: 1
+                active: 1,
+                type: 0
 
             }
         ]

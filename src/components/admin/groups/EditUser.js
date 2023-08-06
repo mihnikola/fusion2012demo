@@ -62,7 +62,7 @@ function EditUser() {
         id={id}
         value={name}
         onChange={handleChangeName}
-        placeholder="Unesite ime"
+        placeholder="Edit name"
       />
       <input
         type="text"
@@ -71,7 +71,7 @@ function EditUser() {
         id={id}
         value={lastName}
         onChange={handleChangeLastName}
-        placeholder="Unesite prezime"
+        placeholder="Edit surname"
       />
       <input
         type="text"
@@ -80,8 +80,10 @@ function EditUser() {
         id={id}
         value={email}
         onChange={handleChangeEmail}
+        placeholder="Edit email"
+
       />
-      <span className={styles.status}>Status korisnika</span>
+      <span className={styles.status}>Status user</span>
       <input
         type="checkbox"
         autoComplete="off"
@@ -95,13 +97,13 @@ function EditUser() {
           className={styles.btnAdmin}
           onClick={changeUserHandler}
         >
-          Sačuvaj promene
+          Save changes
         </button>
         <button
           className={styles.btnAdminRemove}
           onClick={resetHandler}
         >
-          Otkaži promene
+          Cancel
         </button>
       </div>
       </>

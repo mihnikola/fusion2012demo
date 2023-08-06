@@ -7,12 +7,10 @@ import GroupMembers from './GroupMembers';
 import { useDispatch, useSelector } from 'react-redux';
 import { groupsActions } from '../../store/groups-slice';
 import Input from '../../UI/Input';
-import { groupActions } from '../../store/group-slice';
 
 export default function EditGroupForm() {
 
     const group = useSelector((state) => state.groups.group);
-    console.log("asdsaijdas",group)
 
     const dispatch = useDispatch();
     const resetHandler = (e) => {
@@ -26,11 +24,6 @@ export default function EditGroupForm() {
 
 
     };
-    const addUserHandler = (data) => {
-
-    }
-    const onChangeHandler = (data) => {
-    }
     const changeGroupNameHandler = (e) => {
         const name = e.target.value;
         dispatch(groupsActions.updateGroupName({ group, groupName: name  }))
@@ -42,7 +35,7 @@ export default function EditGroupForm() {
                 <form action="#" method="post">
                     <Header
                         style={styles.titleEditGroup}
-                        title="Group of users"
+                        title="Group"
                         image={FusionLogo}
                         imageStyle={styles.log}
                     />
@@ -54,7 +47,7 @@ export default function EditGroupForm() {
                         onChange={changeGroupNameHandler}
                         value={group.name}
                     />
-                    <DropdownGroup  />
+                    <DropdownGroup group={group} />
                     <GroupMembers users={group.users} group={group} />
                     <button className={styles.btnAdmin} id={group.id} onClick={saveChangesHandler}>Sačuvaj promene</button>
                     <button className={styles.btnAdminRemove} onClick={resetHandler}>Otkaži promene</button>

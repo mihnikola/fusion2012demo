@@ -1,11 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import Button from '../../UI/Button';
+import React, { useRef, useState } from 'react'
 import styles from '../groups/DropdownGroup.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { usersActions } from '../../store/users-slice';
-// import "./SearchableDropdown.css";
-function DropdownGroup() {
+import { groupsActions } from '../../store/groups-slice';
+function DropdownGroup({group}) {
    
     const [isOpen, setIsOpen] = useState(false);
     const [value, setValue] = useState("");
@@ -14,13 +11,10 @@ function DropdownGroup() {
     const dispatch = useDispatch();
 
     const selectOption = (option) => {
-       
         if (option.lastName != null) {
-
             inputRef.current.value = option.name + " " + option.lastName;
         } else {
             inputRef.current.value = option.name;
-
         }
         setIsOpen((isOpen) => !isOpen);
     };
@@ -40,19 +34,9 @@ function DropdownGroup() {
 
     const addHandler = (e) => {
         e.preventDefault();
-        console.log("addHandler value", inputRef.current.value)
-
-        const selectedEmployeeId2 = users.find(
-            (user) => user.name + " " + user.lastName === inputRef.current.value
-        );
-
-        console.log("addHandler", selectedEmployeeId2)
-
-        //ovde ide dispatch za dodavanje usera u listu
-
-
-
-
+        const groupUser = users.find((user) => user.name + " " + user.lastName === inputRef.current.value);
+        dispatch(groupsActions.addUser({ group, user: groupUser }))
+        inputRef.current.value = '';
     };
     return (
         <div className={styles.responses}>

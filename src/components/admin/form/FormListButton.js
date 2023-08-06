@@ -32,7 +32,6 @@ export default function FormListButton(props) {
 
   const editGroupHandler = (e) => {
     e.preventDefault();
-    console.log(" editGroupHandler id",e.target.id)
     dispatch(groupsActions.setEditMode({edit: true, id:e.target.id}));
 
   };

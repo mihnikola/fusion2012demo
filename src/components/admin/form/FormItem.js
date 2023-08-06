@@ -43,9 +43,9 @@ export default function FormItem(props) {
           checked={checkedUsersIds.includes(user.name)}
         />
         <span className={styles['checkbox-custom']}></span>
-        <span className={styles.users}>{user.last_name ? user.name + " " + user.last_name : user.name}</span>
+        <span className={styles.users}>{user.lastName ? user.name + " " + user.lastName : user.name}</span>
         <i className={styles['faiconsforuser-s']}>
-          {user.type === 1 ? <FaUsers /> : <FaUser />}</i>
+          {user.type === 0 ? <FaUser /> : <FaUsers />}</i>
       </label>
     </div>
   )
